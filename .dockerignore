@@ -1,0 +1,4 @@
+.git
+.eslintrc.json
+node_modules
+database/data

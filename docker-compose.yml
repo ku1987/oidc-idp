@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  oidc_app:
+    build: 
+      context: .
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./:/usr/src/app/
+      - /usr/src/app/node_modules
+    networks:
+      - oidc
+
+  postgres:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - "15432:5432"
+    volumes:
+      - ./database/database-seed.sql:/docker-entrypoint-initdb.d/database-seed.sql
+      - ./database/data:/var/lib/postgresql/data
+    networks:
+      - oidc
+
+networks:
+  oidc:
