@@ -11,8 +11,12 @@ export default (): Router => {
     const { query } = req;
     const { state, client_id: clientId, code_challenge: codeChallenge } = query;
 
+    // TODO: Verify client_id and redirect URI
+
     const urlParams = new URLSearchParams();
     const code = uuidv4();
+    // TODO: Save authorization code
+
     urlParams.append('state', state as string);
     urlParams.append('code', code);
 

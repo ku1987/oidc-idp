@@ -12,3 +12,4 @@ OIDC Identity Provider
   - [ ] Generate token
   - [ ] 
 - [ ] Storing user email
+- [ ] Validation
