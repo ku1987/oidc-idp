@@ -1,4 +1,5 @@
 FROM node:16.15-alpine3.14
+RUN apk update && apk add bash
 RUN mkdir -p /opt/app
 WORKDIR /opt/app
 RUN adduser -S app

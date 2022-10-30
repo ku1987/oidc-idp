@@ -3,7 +3,8 @@ import cors from 'cors';
 import morgan from 'morgan';
 
 import healthRouter from './routers/health';
-import usersRouter from './routers/users';
+import authorizeRouter from './routers/authorize';
+import redirectRouter from './routers/redirect';
 
 const app = express();
 
@@ -12,7 +13,8 @@ app.use(cors());
 app.use(morgan('combined'));
 
 app.use(healthRouter());
-app.use(usersRouter());
+app.use(redirectRouter());
+app.use(authorizeRouter());
 
 const PORT = process.env.PORT || 3000;
 
