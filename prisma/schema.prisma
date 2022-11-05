@@ -12,6 +12,8 @@ datasource db {
 
 model Client {
   id             String       @id @default(uuid())
-  clientId        String  @unique
+  clientId       String       @unique
   createdAt      DateTime     @default(now())
+  deletedAt      DateTime
+  updatedAt      DateTime
 }
