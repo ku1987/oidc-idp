@@ -23,4 +23,11 @@ app.use(tokenRouter());
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => console.log(`Listening on port ${PORT}.`));
+app
+  .listen(PORT, () => console.log(`Listening on port ${PORT}.`))
+  .on('unhandledRejection', (reason, p) => {
+    console.error(reason, 'Unhandled Rejection at Promise', p);
+  })
+  .on('uncaughtException', (err) => {
+    console.error(err, 'Uncaught Exception thrown');
+  });

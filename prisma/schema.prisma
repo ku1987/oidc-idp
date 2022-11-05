@@ -13,6 +13,7 @@ datasource db {
 model Client {
   id             String       @id @default(uuid())
   clientId       String       @unique
+  redirectUri    String       
   createdAt      DateTime     @default(now())
   deletedAt      DateTime?
   updatedAt      DateTime?
