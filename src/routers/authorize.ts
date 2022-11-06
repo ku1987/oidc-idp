@@ -42,7 +42,7 @@ export default (): Router => {
     urlParams.append('state', state as string);
     urlParams.append('code', code);
 
-    res.redirect(`/redirect?${urlParams.toString()}`);
+    res.redirect(`${client.redirectUri}?${urlParams.toString()}`);
   });
 
   return router;
