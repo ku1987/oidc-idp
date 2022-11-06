@@ -1,7 +1,5 @@
 import { Router, Request, Response } from 'express';
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import { getClientByClientId, createClient } from '../models/client';
 
 const BASE_PATH = '/register';
 
@@ -20,12 +18,7 @@ export default (): Router => {
     }
     // TODO: Data validation
 
-    const existing = await prisma.client.findUnique({
-      where: {
-        clientId,
-      },
-    });
-
+    const existing = await getClientByClientId(clientId);
     if (existing) {
       res.status(400).json({
         message: 'This client ID is already used.',
@@ -33,12 +26,11 @@ export default (): Router => {
       return;
     }
 
-    const user = await prisma.client.create({
-      data: {
-        clientId,
-        redirectUri,
-      },
-    });
+    const payload = {
+      clientId,
+      redirectUri,
+    };
+    const user = await createClient(payload);
     console.log({ created: user });
 
     res.status(200).json({
