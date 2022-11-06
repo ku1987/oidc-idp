@@ -7,7 +7,7 @@ export default (): Router => {
 
   router.get(`${BASE_PATH}`, async (req: Request, res: Response) => {
     res.status(200).json({
-      status: 'success',
+      message: 'success!',
       data: 'OK',
     });
   });
@@ -18,12 +18,12 @@ export default (): Router => {
     const { health = null } = req.body;
     if (health === 'good') {
       res.status(200).json({
-        status: 'success',
+        message: 'success',
         data: health,
       });
     } else {
       res.status(400).json({
-        status: 'fail',
+        message: 'fail',
       });
     }
   });

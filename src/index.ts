@@ -5,7 +5,7 @@ import bodyParser from 'body-parser';
 
 import healthRouter from './routers/health';
 import authorizeRouter from './routers/authorize';
-import redirectRouter from './routers/redirect';
+import registerRouter from './routers/register';
 import tokenRouter from './routers/token';
 
 const app = express();
@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('combined'));
 
 app.use(healthRouter());
-// app.use(redirectRouter());
+app.use(registerRouter());
 app.use(authorizeRouter());
 app.use(tokenRouter());
 

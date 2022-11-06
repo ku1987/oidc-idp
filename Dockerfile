@@ -5,8 +5,7 @@ WORKDIR /usr/src/app/
 RUN adduser -S app
 COPY ./ .
 RUN npm ci
-RUN npm i -g prisma@4.5.0 pm2@5.2.2
-RUN ./node_modules/.bin/pm2 install typescript
+RUN npm i -g prisma@4.5.0
 RUN chown -R app /usr/src/app/
 USER app
 EXPOSE 3000
