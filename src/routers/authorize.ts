@@ -42,10 +42,9 @@ export default (): Router => {
       const savedCode = await saveCode({
         code,
         codeChallenge: codeChallenge as string,
-        client: {
-          create: {
-            clientId: clientId as string,
-            redirectUri: redirectUri,
+        Client: {
+          connect: {
+            id: client.id,
           },
         },
       });
@@ -53,7 +52,7 @@ export default (): Router => {
       urlParams.append('state', state as string);
       urlParams.append('code', code);
 
-      res.json(savedCode);
+      res.json({ data: savedCode });
       // res.redirect(`${client.redirectUri}?${urlParams.toString()}`);
     } catch (error) {
       console.error(error);
