@@ -11,7 +11,7 @@ export default (): Router => {
 
   router.get(`${BASE_PATH}`, async (req: Request, res: Response) => {
     const { query } = req;
-    const { state, clientId, codeChallenge, redirectUri } = query;
+    const { state, client_id: clientId, code_challenge: codeChallenge, redirect_uri: redirectUri } = query;
 
     if (!clientId || !codeChallenge || !redirectUri) {
       res.status(400).json({
@@ -52,7 +52,10 @@ export default (): Router => {
       urlParams.append('state', state as string);
       urlParams.append('code', code);
 
-      res.json({ data: savedCode });
+      res.json({
+        message: 'success',
+        data: savedCode,
+      });
       // res.redirect(`${client.redirectUri}?${urlParams.toString()}`);
     } catch (error) {
       console.error(error);

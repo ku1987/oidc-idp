@@ -39,9 +39,10 @@ export default (): Router => {
         data: { user },
       });
     } catch (error) {
+      console.error(error);
       res.status(500).json({
         message: 'Uncaught error.',
-        detail: error,
+        detail: error.data,
       });
     }
   });
