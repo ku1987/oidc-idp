@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,9 +8,24 @@ datasource db {
 }
 
 model Client {
-  id             String       @id @default(uuid())
-  clientId       String       @unique
-  redirectUri    String       
-  createdAt      DateTime     @default(now())
-  updatedAt      DateTime?
+  id          String     @id @default(uuid())
+  clientId    String     @unique @map("client_id")
+  createdAt   DateTime   @default(now()) @map("created_at")
+  updatedAt   DateTime?  @map("updated_at")
+  redirectUri String     @map("redirect_uri")
+  authCodes   AuthCode[]
+
+  @@map("clients")
+}
+
+model AuthCode {
+  id            String   @id @default(uuid())
+  code          String
+  isUsed        Boolean  @default(false) @map("is_used")
+  createdAt     DateTime @default(now()) @map("created_at")
+  codeChallenge String   @map("code_challenge")
+  Client        Client   @relation(fields: [clientId], references: [id])
+  clientId      String
+
+  @@map("auth_codes")
 }

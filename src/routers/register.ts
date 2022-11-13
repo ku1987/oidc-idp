@@ -30,13 +30,20 @@ export default (): Router => {
       clientId,
       redirectUri,
     };
-    const user = await createClient(payload);
-    console.log({ created: user });
+    try {
+      const user = await createClient(payload);
+      console.log({ created: user });
 
-    res.status(200).json({
-      message: 'success',
-      data: { user },
-    });
+      res.status(200).json({
+        message: 'success',
+        data: { user },
+      });
+    } catch (error) {
+      res.status(500).json({
+        message: 'Uncaught error.',
+        detail: error,
+      });
+    }
   });
 
   return router;

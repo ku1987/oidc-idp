@@ -9,7 +9,7 @@ services:
       - "3000:3000"
     volumes:
       - ./:/usr/src/app/
-      - nodemodules:/usr/src/app/node_modules
+      # - nodemodules:/usr/src/app/node_modules
     networks:
       - oidc
 
