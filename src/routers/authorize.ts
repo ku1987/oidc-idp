@@ -36,7 +36,7 @@ export default (): Router => {
     }
 
     // Let's assume the user gives permission to access the resource server,
-    // to avoid dealing with consent pages and stuff.
+    // TODO: Create frontend app for user consent page.
 
     const urlParams = new URLSearchParams();
     const code = generateAuthCode();

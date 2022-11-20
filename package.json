@@ -5,36 +5,37 @@
   "main": "index.ts",
   "scripts": {
     "start": "nodemon",
-    "test": "jest --watch --forceExit"
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "4.5.0",
     "@types/express": "^4.17.11",
-    "@types/jest": "^26.0.20",
     "@types/supertest": "^2.0.10",
     "base64url": "^3.0.1",
     "body-parser": "^1.20.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "jest": "^29.2.2",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.20",
     "pg": "^8.8.0",
     "supertest": "^6.3.1",
-    "ts-jest": "^29.0.3",
     "ts-node": "^10.9.1",
     "typescript": "^4.8.4",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.10",
+    "@types/jest": "^29.2.3",
     "@types/morgan": "^1.9.2",
     "@types/node": "^14.14.31",
     "@types/uuid": "^8.3.4",
+    "jest": "^29.3.1",
+    "jest-environment-node": "^29.3.1",
     "prisma": "^4.5.0",
+    "ts-jest": "^29.0.3",
     "tsconfig-paths": "^4.1.0"
   },
   "volta": {

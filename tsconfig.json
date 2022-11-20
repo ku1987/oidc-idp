@@ -20,12 +20,15 @@
       "lib": [
           "ES2019.Array"
       ],
-      "types": ["node"]
+      "types": ["node", "jest"]
   },
   "include": [
       "./src/*"
   ],
   "exclude": [
-      "node_modules"
+      "node_modules",
+      "**/*.test.*",
+    "**/__mocks__/*",
+      "**/__tests__/*"
   ]
 }

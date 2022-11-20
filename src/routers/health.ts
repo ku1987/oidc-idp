@@ -7,7 +7,7 @@ export default (): Router => {
 
   router.get(`${BASE_PATH}`, async (req: Request, res: Response) => {
     res.status(200).json({
-      message: 'success!',
+      message: 'success',
       data: 'OK',
     });
   });

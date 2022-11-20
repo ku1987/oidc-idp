@@ -9,7 +9,7 @@ describe('Health router', () => {
     app.use(healthRouter());
     const response = await supertest(app).get('/health');
     expect(response.status).toBe(200);
-    expect(response.body.status).toBe('success');
+    expect(response.body.message).toBe('success');
     expect(response.body.data).toBe('OK');
   });
   it('Pass health check (POST)', async () => {
@@ -20,7 +20,7 @@ describe('Health router', () => {
       health: 'good',
     });
     expect(response.status).toBe(200);
-    expect(response.body.status).toBe('success');
+    expect(response.body.message).toBe('success');
     expect(response.body.data).toBe('good');
   });
 });
