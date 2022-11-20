@@ -35,6 +35,9 @@ export default (): Router => {
       return;
     }
 
+    // Let's assume the user gives permission to access the resource server,
+    // to avoid dealing with consent pages and stuff.
+
     const urlParams = new URLSearchParams();
     const code = uuidv4();
 
@@ -49,14 +52,12 @@ export default (): Router => {
         },
       });
 
+      console.log(`Authorization code has been saved. code: ${code} client: ${savedCode.clientId}`);
+
       urlParams.append('state', state as string);
       urlParams.append('code', code);
 
-      res.json({
-        message: 'success',
-        data: savedCode,
-      });
-      // res.redirect(`${client.redirectUri}?${urlParams.toString()}`);
+      res.redirect(`${client.redirectUri}?${urlParams.toString()}`);
     } catch (error) {
       console.error(error);
       res.status(500).json({

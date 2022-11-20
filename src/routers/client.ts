@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express';
 import { getClientByClientId, createClient } from '../models/client';
 
-const BASE_PATH = '/register';
+const BASE_PATH = '/client';
 
 export default (): Router => {
   const router = Router();
