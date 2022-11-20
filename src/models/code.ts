@@ -23,3 +23,15 @@ export const saveCode = async (payload: Prisma.AuthCodeCreateInput) => {
   });
   return code;
 };
+
+export const markCodeIsUsed = async (codeId: string) => {
+  const code = await prisma.authCode.update({
+    data: {
+      isUsed: true,
+    },
+    where: {
+      id: codeId,
+    },
+  });
+  return code;
+};

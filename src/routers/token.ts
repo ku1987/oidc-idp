@@ -1,7 +1,6 @@
 import { Router, Request, Response } from 'express';
-import { getAuthCodeByCode } from '../models/code';
-import * as crypto from 'crypto';
-import base64url from 'base64url';
+import { getAuthCodeByCode, markCodeIsUsed } from '../models/code';
+import { base64urlEncode } from '../lib/code';
 
 const BASE_PATH = '/token';
 
@@ -10,6 +9,7 @@ export default (): Router => {
 
   router.post(`${BASE_PATH}`, async (req: Request, res: Response) => {
     const { code, code_verifier: codeVerifier, client_id: clientId, redirect_uri: redirectUri } = req.body;
+    // TODO: Move all the validation stuff to another file.
 
     if (!code || !clientId || !codeVerifier || !redirectUri) {
       res.status(400).json({
@@ -38,9 +38,7 @@ export default (): Router => {
     }
     // TODO: Check redirect_uri is correct.
 
-    const base64Digest = crypto.createHash('sha256').update(codeVerifier).digest('base64');
-    const challenge = base64url.fromBase64(base64Digest);
-
+    const challenge = base64urlEncode(codeVerifier);
     if (authCode.codeChallenge !== challenge) {
       res.status(400).json({
         message: 'Invalid code challenge.',
@@ -48,7 +46,7 @@ export default (): Router => {
       return;
     }
 
-    // TODO: Update code is_used
+    await markCodeIsUsed(authCode.id);
 
     // TODO: Generate token
     const token = {

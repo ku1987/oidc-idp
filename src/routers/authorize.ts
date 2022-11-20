@@ -1,8 +1,8 @@
 import { Router, Request, Response } from 'express';
 import { URLSearchParams } from 'url';
-import { v4 as uuidv4 } from 'uuid';
 import { getClientByClientId } from '../models/client';
 import { saveCode } from '../models/code';
+import { generateAuthCode } from '../lib/code';
 
 const BASE_PATH = '/authorize';
 
@@ -39,7 +39,7 @@ export default (): Router => {
     // to avoid dealing with consent pages and stuff.
 
     const urlParams = new URLSearchParams();
-    const code = uuidv4();
+    const code = generateAuthCode();
 
     try {
       const savedCode = await saveCode({
